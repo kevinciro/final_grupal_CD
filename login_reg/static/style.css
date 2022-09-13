@@ -1,0 +1,12 @@
+body{
+    background-image: url('./img/fly.jpg');
+    background-attachment:fixed;
+    background-position:center;
+    background-repeat: repeat;
+    background-size:85rem;
+}
+
+h1{
+    font-family: 'Roboto', sans-serif;
+    color:aliceblue;
+}
