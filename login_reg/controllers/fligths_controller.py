@@ -38,8 +38,18 @@ def find_fligth_by_id(id):
 
     fligth = Fligth.get_by_id(formulario)
 
+    date = str(fligth.departure_date)[0:10]
+    anio = date[0:4]
+    mes = date[5:7]
+    dia = date[8:]
+    date = dia + "/" + mes + "/" + anio
+    fligth.departure_date = date
+
+    hour = str(fligth.departure_hour)[11:16]
+    fligth.departure_hour = hour
+
     # Hay que cambiar la pagina que se renderiza
-    return redirect('/dashboard')
+    return render_template("render_flight.html", fligth=fligth)
 
 
 # Creando una ruta para consultar vuelos por id

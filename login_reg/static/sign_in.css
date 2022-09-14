@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url('../static/Images/airplane8.jpg');
+    background-attachment:local;
+    background-position:center;
+    background-size:100rem; 
+    background-repeat: no-repeat; 
+}
+
+#transparent{
+    background: transparent;
+    color: #111;
+    background-color: rgba(255, 255, 255, .2);
+    height: 650px;
+    margin-top: -100px;
+}
+
+
+a{
+    color: blue;
+    font-weight: bold;
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.cookie {
+    width: 1000px;
+    height: 130px;
+    margin: 0 auto;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+    background-color: rgb(227, 224, 224);
+}
+.cookie img{
+    padding: 20px;
+    width: 90px;
+    margin-left: 10px;
+}
+.text p, .cookie h3{
+    margin: 10px 70px 10px 30px
+}
+.last{
+    width: 150px;
+    height: 30px;
+    margin-right: 120px;
+    background-color: #9fc5f8;
+    box-shadow: 2px 2px 2px black;
+}

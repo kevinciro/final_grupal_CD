@@ -7,12 +7,24 @@ from login_reg.models.users import User
 # Importando BCrypt (encriptar)
 from flask_bcrypt import Bcrypt
 
+from login_reg.models.fligths import Fligth
+
 bcrypt = Bcrypt(app)  # inicializando instancia de Bcrypt
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/render_register', methods=['GET'])
+def render_register():
+    return render_template("register.html")
+
+
+@app.route('/render_profile', methods=['GET'])
+def render_profile():
+    return render_template("profile.html")
 
 
 # Creando una ruta para /register
@@ -24,8 +36,9 @@ def register():
     #   "email": "elena@cd.com",
     #   "password": "123456",
     # }
+
     if not User.valida_usuario(request.form):
-        return redirect('/')
+        return redirect('/render_register')
 
     pwd = bcrypt.generate_password_hash(request.form['password'])  # Me encripta el password
 
@@ -38,10 +51,10 @@ def register():
         "password": pwd
     }
 
+
+
     id = User.save(formulario)  # Guardando a mi usuario y recibo el ID del nuevo registro
-
     session['usuario_id'] = id  # Guardando en sesion el identificador
-
     return redirect('/dashboard')
 
 
@@ -73,10 +86,30 @@ def dashboard():
 
     user = User.get_by_id(formulario)
 
-    return render_template('dashboard.html', user=user)
+    fligths = Fligth.get_all()
+    formatoFecha(fligths)
+    formatoHora(fligths)
+
+    return render_template('dashboard.html', user=user, fligths=fligths)
 
 
 @app.route('/logout')
 def logout():
     session.clear()  # Elimine la sesión
     return redirect('/')
+
+
+def formatoFecha(fligths):
+    for fligth in fligths:
+        date = str(fligth.departure_date)[0:10]
+        anio = date[0:4]
+        mes = date[5:7]
+        dia = date[8:]
+        date = dia+"/"+mes+"/"+anio
+        fligth.departure_date = date
+
+
+def formatoHora(fligths):
+    for fligth in fligths:
+        hour = str(fligth.departure_hour)[11:16]
+        fligth.departure_hour = hour

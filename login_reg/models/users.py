@@ -83,7 +83,7 @@ class User:
 
         # Consultar si YA existe el correo
         query = "SELECT * FROM users WHERE email = %(email)s"
-        results = connectToMySQL('final').query_db(query, formulario)
+        results = connectToMySQL('finalGrupal').query_db(query, formulario)
         if len(results) >= 1:
             flash('E-mail registrado previamente', 'registro')
             es_valido = False

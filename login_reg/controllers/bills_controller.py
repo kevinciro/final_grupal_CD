@@ -1,4 +1,4 @@
-from flask import render_template, redirect, session, request, flash
+from flask import redirect, request, render_template
 from login_reg import app
 from login_reg.models.bills import Bill
 
@@ -7,20 +7,27 @@ from login_reg.models.bills import Bill
 @app.route('/bills/new', methods=['POST'])
 def new_bill():
     # request.form = {
-    #         self.total_price = 100000
+    #         self.total_seats = 3
+    #
     #         self.created_at = data['created_at']
     #         self.updated_at = data['updated_at']
     #         self.user_id = 20
     # }
 
     formulario = {
-        "total_price": request.form['departure_date'],
+        "total_price": 0,
         "user_id": request.form['user_id'],
     }
 
-    Bill.save(formulario)
+    id = Bill.save(formulario)
 
-    return redirect('/dashboard')
+    formularioGet = {
+        "id": id,
+    }
+
+    bill = Bill.get_by_id(formularioGet)
+
+    return render_template('purchase_seats.html', bill=bill, flight_id=request.form['flight_id'])
 
 
 # Creando una ruta para consultar facturas por id

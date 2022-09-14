@@ -23,7 +23,13 @@ class Bill:
 
     @classmethod
     def get_by_id(cls, formulario):
-        query = "SELECT b.*, u.first_name, u.last_name, u.dni FROM finalGrupal.bills AS b INNER JOIN users AS u ON b.user_id = u.id WHERE id = %(id)s"
+        query = "SELECT b.*, u.first_name, u.last_name, u.dni FROM finalGrupal.bills AS b INNER JOIN users AS u ON b.user_id = u.id WHERE b.id = %(id)s"
         result = connectToMySQL('finalGrupal').query_db(query, formulario)  # Select recibe lista
         bill = cls(result[0])
         return bill
+
+    @classmethod
+    def update(cls, formulario):
+        query = "UPDATE bills SET total_price=%(total_price)s WHERE id=%(id)s"
+        result = connectToMySQL('finalGrupal').query_db(query, formulario)  # 1 - Insert recibe id
+        return result  # result = Identificador del nuevo registro

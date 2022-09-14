@@ -1,6 +1,7 @@
 from flask import render_template, redirect, session, request, flash
 from login_reg import app
 from login_reg.models.seats import Seat
+from login_reg.models.bills import Bill
 
 
 # Creando una ruta para crear un nuevo vuelo
@@ -20,10 +21,18 @@ def new_seat():
         "seat_number": request.form['seat_number'],
         "seat_price": request.form['seat_price'],
         "user_id": request.form['user_id'],
-        "fligth_id": request.form['fligth_id'],
-        "bill_id": request.form['bill_id'],
+        "fligth_id": request.form['flight_id'],
+        "bill_id": request.form["bill_id"]
     }
     Seat.save(formulario)  # Guardando a mi usuario y recibo el ID del nuevo registro
+
+    formularioBill = {
+        "id": request.form["bill_id"],
+        "total_price": request.form['seat_price']
+    }
+
+    Bill.update(formularioBill)
+
     return redirect('/dashboard')
 
 

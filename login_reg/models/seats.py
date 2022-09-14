@@ -36,3 +36,13 @@ class Seat:
         result = connectToMySQL('finalGrupal').query_db(query, formulario)  # Select recibe lista
         seat = cls(result[0])
         return seat
+
+    @classmethod
+    def get_by_user_and_flight(cls, formulario):
+        query = "SELECT s.* FROM finalGrupal.seats AS s WHERE user_id = %(user_id)s and fligth_id = %(fligth_id)s;"
+        results = connectToMySQL('finalGrupal').query_db(query, formulario)  # Select recibe lista
+        seats = []
+        for result in results:
+            seat = cls(result)
+            seats.append(seat)
+        return seats

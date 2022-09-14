@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #c7c6b8;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right,#194265, #9f8663);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right,#194265, #9f8663); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.container{
+    background-image: url('../Images/airplane9.jpg');
+    background-attachment:local;
+    background-position:center;
+    background-size:90rem; 
+    background-repeat: no-repeat;
+    width: 5000px;
+}
+#signInButton{
+    width: 150px;
+    height: 50px;
+    margin-top: 50px;
+    margin-right: 20px;
+    text-align: center;
+    font-size: large;
+}
+
+#transparent{
+    background: transparent;
+    color: #111;
+    background-color: rgba(255, 255, 255, .2);
+    height: 710px;
+    margin-top: -10px;
+}
